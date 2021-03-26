@@ -9,32 +9,57 @@
 <head>
   <meta charset="utf-8" />
   <title></title>
-  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<script type="text/javascript">
-var flags=[0 , 0 , 0 , 0 , 0]
-function addToCart(i) {
-   var product=[306522275 , 306522275 , 306522275 , 306522275 , 306522275]
-   var productId = product[i];
-   Ecwid.Cart.addProduct(productId);
-   flags[i]=1;
- if (flags=="1,1,1,1,1") {
-    document.getElementById(0).src ="./pictures/якубович.jpg";
-    document.getElementById(0).style="position:absolute;left:100px;right:100px;z-index:5;";
-   };
- };
-  
 
+
+<script type="text/javascript">
+
+product=[306522275 , 306522273 , 306522277 , 306522269 , 306522272];
+
+Ecwid.OnCartChanged.add(function(cart) {
+ cartProductItems=[];
+for (var i = cart.items.length; i > 0; i--) {
+cartProductItems.push(cart.items[(i-1)].product.id);};
+chekMatches();
+ });
+
+function chekMatches(){
+var matches=0
+for(var i=0; i < product.length; i++){
+      cache = product[i];
+	  for(var j=0; j < cartProductItems.length; j++){
+	       if(cache == cartProductItems[j]){
+	         matches++ 
+		    }
+	  
+	    } 
+    
+	};
+if (matches == product.length) {
+    document.getElementById(0).src ="./авто/якубович.jpg";
+    document.getElementById(0).style="position:absolute;left:100px;right:100px;z-index:5;";
+}else {
+   document.getElementById(0).src ="./авто/Снимок.PNG";
+   document.getElementById(0).style="position:absolute;left:100px;right:100px;z-index:0;";
+   };
+};
+
+function addToCart(i) {
+     var productId = product[i];
+   Ecwid.Cart.addProduct(productId);
+ };
 </script>
 
-<img id=0 src = "./pictures/Снимок.PNG" tab="photo" style="position:absolute;left:100px;right:100px" width=600 height=400>   
-<p><a href="javascript:addToCart(0)"><img id=1 src="./pictures/Шины.PNG" tab="photo" style="position:absolute;left: 445px;right:200px;top: 300px;width: 90px;height: 90px;" width="30" height="30"></a></p>
-<p><a href="javascript:addToCart(1)"><img id=2 src="./pictures/мотор.PNG" tab="photo" style="position:absolute;left: 510px;right:200px;top: 40px;width: 90px;height: 90px;" width="30" height="30"></a></p>
-<p><a href="javascript:addToCart(2)"><img id=3 src="./pictures/Турбина.PNG" tab="photo" style="position:absolute;left: 605px;right:200px;top: 40px;width: 90px;height: 90px;" width="30" height="30"></a></p>
-<p><a href="javascript:addToCart(3)"><img id=4 src="./pictures/Аммортизатор.PNG" tab="photo" style="position:absolute;left: 105px;right:200px;top: 200px;width: 90px;height: 90px;" width="30" height="30"></a></p>
-<p><a href="javascript:addToCart(4)"><img id=5 src="./pictures/радиатор.PNG" tab="photo" style="position:absolute;left: 275px;right:200px;top: 40px;width: 90px;height: 90px;" width="30" height="30"></a></p>
+<img id=0 src = "./авто/Снимок.PNG" tab="photo" style="position:absolute;left:100px;right:100px" width=600 height=400>   
+<p><a href="javascript:addToCart(0)"><img id=1 src="./авто/Шины.PNG" tab="photo" style="position:absolute;left: 445px;right:200px;top: 300px;width: 90px;height: 90px;" width="30" height="30"></a></p>
+<p><a href="javascript:addToCart(1)"><img id=2 src="./авто/мотор.PNG" tab="photo" style="position:absolute;left: 510px;right:200px;top: 40px;width: 90px;height: 90px;" width="30" height="30"></a></p>
+<p><a href="javascript:addToCart(2)"><img id=3 src="./авто/Турбина.PNG" tab="photo" style="position:absolute;left: 605px;right:200px;top: 40px;width: 90px;height: 90px;" width="30" height="30"></a></p>
+<p><a href="javascript:addToCart(3)"><img id=4 src="./авто/Аммортизатор.PNG" tab="photo" style="position:absolute;left: 105px;right:200px;top: 200px;width: 90px;height: 90px;" width="30" height="30"></a></p>
+<p><a href="javascript:addToCart(4)"><img id=5 src="./авто/радиатор.PNG" tab="photo" style="position:absolute;left: 275px;right:200px;top: 40px;width: 90px;height: 90px;" width="30" height="30"></a></p>
+
+
 
 </body>
 </html>
