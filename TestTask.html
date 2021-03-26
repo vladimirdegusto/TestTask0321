@@ -12,10 +12,10 @@
 
 <script type="text/javascript">
 
-product=[320284426 , 320284424 , 320284428 , 320284420 , 320284423];
+product=[320284426 , 320284424 , 320284428 , 320284420 , 320284423];                //создаем список товаров для работы с апи
 
-Ecwid.OnCartChanged.add(function(cart) {
- cartProductItems=[];
+Ecwid.OnCartChanged.add(function(cart) {                                            //JS Апи вызваемая каждый раз при смене состава корзины
+ cartProductItems=[];                                                               //Очищаем список продуктов в корзине и пушим айди товаров корзины в список
 for (var i = cart.items.length; i > 0; i--) {
 cartProductItems.push(cart.items[(i-1)].product.id);};
 chekMatches();
@@ -23,7 +23,7 @@ chekMatches();
 
 function chekMatches(){
 var matches=0
-for(var i=0; i < product.length; i++){
+for(var i=0; i < product.length; i++){                                              // сравниваем списки продуктов и видов товаров в корзине и при каждом совпадении добавляем 1 в переменную matches
       cache = product[i];
 	  for(var j=0; j < cartProductItems.length; j++){
 	       if(cache == cartProductItems[j]){
@@ -33,16 +33,16 @@ for(var i=0; i < product.length; i++){
 	    } 
     
 	};
-if (matches == product.length) {
+if (matches == product.length) {                                                   // Если колличество товаров в корзине совпало со списком всех необходимых товаров то меняем картинку на якубовича и стилем перемещаем ее на передний план
     document.getElementById(0).src ="./pictures/якубович.jpg";
     document.getElementById(0).style="position:absolute;left:100px;right:100px;z-index:5;";
-}else {
+}else {                                                                            // иначе схематичное изображене машины 
    document.getElementById(0).src ="./pictures/Снимок.PNG";
    document.getElementById(0).style="position:absolute;left:100px;right:100px;z-index:0;";
    };
 };
 
-function addToCart(i) {
+function addToCart(i) {                                                             // функция добавлеия товара в корзину при вызове ее гиперссылкой с передачей ей индекса товара, выбирает айди товара из списка и передает этот айди JS АПИ магазина.
      var productId = product[i];
    Ecwid.Cart.addProduct(productId);
  };
